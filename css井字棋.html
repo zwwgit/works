@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="https://jscss.nz86.com/plugin/jquery/jquery.js?v0930"></script>
+    <style type="text/css">
+    .check {
+        display: inline-block;
+        width: 48px;
+        height: 24px;
+        border-radius: 12px;
+        position: relative;
+        background: #eee;
+        border: 1px solid #333;
+        cursor: pointer;
+    }
+
+    .check::after {
+        content: ' ';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 16px;
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        background-color: red;
+        transition: all 0.3s;
+    }
+
+    #check:checked~.check::after {
+        left: 28px;
+        background-color: blue;
+    }
+
+    .box {
+        padding: 10px;
+        overflow: hidden;
+        width: 166px;
+    }
+
+    .box .item {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #333;
+        float: left;
+        margin-left: 5px;
+        margin-top: 5px;
+        position: relative;
+    }
+
+    .box .item label {
+        z-index: 2;
+    }
+
+    .box .item label,
+    .box .item div {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: 30px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .box .item:nth-child(-n+3) {
+        margin-top: 0px;
+    }
+
+    .box .item:nth-child(3n+1) {
+        margin-left: 0px;
+    }
+
+    input[id*="radio-0-x"]:checked~.box label[for="radio-0-x"]::before,
+    input[id*="radio-1-x"]:checked~.box label[for="radio-1-x"]::before,
+    input[id*="radio-2-x"]:checked~.box label[for="radio-2-x"]::before,
+    input[id*="radio-3-x"]:checked~.box label[for="radio-3-x"]::before,
+    input[id*="radio-4-x"]:checked~.box label[for="radio-4-x"]::before,
+    input[id*="radio-5-x"]:checked~.box label[for="radio-5-x"]::before,
+    input[id*="radio-6-x"]:checked~.box label[for="radio-6-x"]::before,
+    input[id*="radio-7-x"]:checked~.box label[for="radio-7-x"]::before,
+    input[id*="radio-8-x"]:checked~.box label[for="radio-8-x"]::before {
+        content: "x";
+        background-color: #2E317C;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    input[id*="radio-0-o"]:checked~.box label[for="radio-0-x"]~div::before,
+    input[id*="radio-1-o"]:checked~.box label[for="radio-1-x"]~div::before,
+    input[id*="radio-2-o"]:checked~.box label[for="radio-2-x"]~div::before,
+    input[id*="radio-3-o"]:checked~.box label[for="radio-3-x"]~div::before,
+    input[id*="radio-4-o"]:checked~.box label[for="radio-4-x"]~div::before,
+    input[id*="radio-5-o"]:checked~.box label[for="radio-5-x"]~div::before,
+    input[id*="radio-6-o"]:checked~.box label[for="radio-6-x"]~div::before,
+    input[id*="radio-7-o"]:checked~.box label[for="radio-7-x"]~div::before,
+    input[id*="radio-8-o"]:checked~.box label[for="radio-8-x"]~div::before {
+        content: "o";
+        background-color: #863020;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    input[id*="radio-0-o"]:checked~.box label[for="radio-0-x"]~div,
+    input[id*="radio-1-o"]:checked~.box label[for="radio-1-x"]~div,
+    input[id*="radio-2-o"]:checked~.box label[for="radio-2-x"]~div,
+    input[id*="radio-3-o"]:checked~.box label[for="radio-3-x"]~div,
+    input[id*="radio-4-o"]:checked~.box label[for="radio-4-x"]~div,
+    input[id*="radio-5-o"]:checked~.box label[for="radio-5-x"]~div,
+    input[id*="radio-6-o"]:checked~.box label[for="radio-6-x"]~div,
+    input[id*="radio-7-o"]:checked~.box label[for="radio-7-x"]~div,
+    input[id*="radio-8-o"]:checked~.box label[for="radio-8-x"]~div {
+        z-index: 3;
+    }
+
+    #c-computer {
+        position: relative;
+        display: block;
+        padding: 10px 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+        width: 166px;
+        text-align: center;
+    }
+
+    #c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer {
+        display: none;
+    }
+
+    input[id*="radio-"]:checked~#c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer,
+    input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~input[id*="radio-"]:checked~#c-computer {
+        display: block;
+        background-color: #000;
+        color: #fff;
+    }
+
+    #c-computer label {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+    }
+
+    input[id*="radio-4"]:not(:checked)~#c-computer label[for="radio-4-o"] {
+        z-index: 1;
+    }
+
+    input[id*="radio-4"]:checked~#c-computer label[for="radio-4-o"] {
+        z-index: 0;
+    }
+
+    #radio-0-x:checked~#radio-1-x:checked~#radio-2-o:not(:checked)~#c-computer label[for="radio-2-o"],
+    #radio-0-x:checked~#radio-1-o:not(:checked)~#radio-2-x:checked~#c-computer label[for="radio-1-o"],
+    #radio-0-o:not(:checked)~#radio-1-x:checked~#radio-2-x:checked~#c-computer label[for="radio-0-o"],
+    #radio-3-x:checked~#radio-4-x:checked~#radio-5-o:not(:checked)~#c-computer label[for="radio-5-o"],
+    #radio-3-x:checked~#radio-4-o:not(:checked)~#radio-5-x:checked~#c-computer label[for="radio-4-o"],
+    #radio-3-o:not(:checked)~#radio-4-x:checked~#radio-5-x:checked~#c-computer label[for="radio-3-o"],
+    #radio-6-x:checked~#radio-7-x:checked~#radio-8-o:not(:checked)~#c-computer label[for="radio-8-o"],
+    #radio-6-x:checked~#radio-7-o:not(:checked)~#radio-8-x:checked~#c-computer label[for="radio-7-o"],
+    #radio-6-o:not(:checked)~#radio-7-x:checked~#radio-8-x:checked~#c-computer label[for="radio-6-o"],
+    #radio-0-x:checked~#radio-3-x:checked~#radio-6-o:not(:checked)~#c-computer label[for="radio-6-o"],
+    #radio-0-x:checked~#radio-3-o:not(:checked)~#radio-6-x:checked~#c-computer label[for="radio-3-o"],
+    #radio-0-o:not(:checked)~#radio-3-x:checked~#radio-6-x:checked~#c-computer label[for="radio-0-o"],
+    #radio-1-x:checked~#radio-4-x:checked~#radio-7-o:not(:checked)~#c-computer label[for="radio-7-o"],
+    #radio-1-x:checked~#radio-4-o:not(:checked)~#radio-7-x:checked~#c-computer label[for="radio-4-o"],
+    #radio-1-o:not(:checked)~#radio-4-x:checked~#radio-7-x:checked~#c-computer label[for="radio-1-o"],
+    #radio-2-x:checked~#radio-5-x:checked~#radio-8-o:not(:checked)~#c-computer label[for="radio-8-o"],
+    #radio-2-x:checked~#radio-5-o:not(:checked)~#radio-8-x:checked~#c-computer label[for="radio-5-o"],
+    #radio-2-o:not(:checked)~#radio-5-x:checked~#radio-8-x:checked~#c-computer label[for="radio-2-o"],
+    #radio-0-x:checked~#radio-4-x:checked~#radio-8-o:not(:checked)~#c-computer label[for="radio-8-o"],
+    #radio-0-x:checked~#radio-4-o:not(:checked)~#radio-8-x:checked~#c-computer label[for="radio-4-o"],
+    #radio-0-o:not(:checked)~#radio-4-x:checked~#radio-8-x:checked~#c-computer label[for="radio-0-o"],
+    #radio-2-x:checked~#radio-4-x:checked~#radio-6-o:not(:checked)~#c-computer label[for="radio-6-o"],
+    #radio-2-x:checked~#radio-4-o:not(:checked)~#radio-6-x:checked~#c-computer label[for="radio-4-o"],
+    #radio-2-o:not(:checked)~#radio-4-x:checked~#radio-6-x:checked~#c-computer label[for="radio-2-o"] {
+        z-index: 2;
+    }
+
+    #radio-0-o:checked~#radio-1-o:checked~#radio-2-x:not(:checked)~#c-computer label[for="radio-2-o"],
+    #radio-0-o:checked~#radio-1-x:not(:checked)~#radio-2-o:checked~#c-computer label[for="radio-1-o"],
+    #radio-0-x:not(:checked)~#radio-1-o:checked~#radio-2-o:checked~#c-computer label[for="radio-0-o"],
+    #radio-3-o:checked~#radio-4-o:checked~#radio-5-x:not(:checked)~#c-computer label[for="radio-5-o"],
+    #radio-3-o:checked~#radio-4-x:not(:checked)~#radio-5-o:checked~#c-computer label[for="radio-4-o"],
+    #radio-3-x:not(:checked)~#radio-4-o:checked~#radio-5-o:checked~#c-computer label[for="radio-3-o"],
+    #radio-6-o:checked~#radio-7-o:checked~#radio-8-x:not(:checked)~#c-computer label[for="radio-8-o"],
+    #radio-6-o:checked~#radio-7-x:not(:checked)~#radio-8-o:checked~#c-computer label[for="radio-7-o"],
+    #radio-6-x:not(:checked)~#radio-7-o:checked~#radio-8-o:checked~#c-computer label[for="radio-6-o"],
+    #radio-0-o:checked~#radio-3-o:checked~#radio-6-x:not(:checked)~#c-computer label[for="radio-6-o"],
+    #radio-0-o:checked~#radio-3-x:not(:checked)~#radio-6-o:checked~#c-computer label[for="radio-3-o"],
+    #radio-0-x:not(:checked)~#radio-3-o:checked~#radio-6-o:checked~#c-computer label[for="radio-0-o"],
+    #radio-1-o:checked~#radio-4-o:checked~#radio-7-x:not(:checked)~#c-computer label[for="radio-7-o"],
+    #radio-1-o:checked~#radio-4-x:not(:checked)~#radio-7-o:checked~#c-computer label[for="radio-4-o"],
+    #radio-1-x:not(:checked)~#radio-4-o:checked~#radio-7-o:checked~#c-computer label[for="radio-1-o"],
+    #radio-2-o:checked~#radio-5-o:checked~#radio-8-x:not(:checked)~#c-computer label[for="radio-8-o"],
+    #radio-2-o:checked~#radio-5-x:not(:checked)~#radio-8-o:checked~#c-computer label[for="radio-5-o"],
+    #radio-2-x:not(:checked)~#radio-5-o:checked~#radio-8-o:checked~#c-computer label[for="radio-2-o"],
+    #radio-0-o:checked~#radio-4-o:checked~#radio-8-x:not(:checked)~#c-computer label[for="radio-8-o"],
+    #radio-0-o:checked~#radio-4-x:not(:checked)~#radio-8-o:checked~#c-computer label[for="radio-4-o"],
+    #radio-0-x:not(:checked)~#radio-4-o:checked~#radio-8-o:checked~#c-computer label[for="radio-0-o"],
+    #radio-2-o:checked~#radio-4-o:checked~#radio-6-x:not(:checked)~#c-computer label[for="radio-6-o"],
+    #radio-2-o:checked~#radio-4-x:not(:checked)~#radio-6-o:checked~#c-computer label[for="radio-4-o"],
+    #radio-2-x:not(:checked)~#radio-4-o:checked~#radio-6-o:checked~#c-computer label[for="radio-2-o"] {
+        z-index: 3;
+    }
+    </style>
+</head>
+
+<body>
+    <form>
+
+        <input type="reset" value="重置"><br/>
+        <input type="checkbox" id="check" hidden="hidden"><br/>
+        <label for="check" class="check"></label>
+        <input type="radio" name="radio-0" id="radio-0-x" hidden="hidden">
+        <input type="radio" name="radio-0" id="radio-0-o" hidden="hidden">
+        <input type="radio" name="radio-1" id="radio-1-x" hidden="hidden">
+        <input type="radio" name="radio-1" id="radio-1-o" hidden="hidden">
+        <input type="radio" name="radio-2" id="radio-2-x" hidden="hidden">
+        <input type="radio" name="radio-2" id="radio-2-o" hidden="hidden">
+        <input type="radio" name="radio-3" id="radio-3-x" hidden="hidden">
+        <input type="radio" name="radio-3" id="radio-3-o" hidden="hidden">
+        <input type="radio" name="radio-4" id="radio-4-x" hidden="hidden">
+        <input type="radio" name="radio-4" id="radio-4-o" hidden="hidden">
+        <input type="radio" name="radio-5" id="radio-5-x" hidden="hidden">
+        <input type="radio" name="radio-5" id="radio-5-o" hidden="hidden">
+        <input type="radio" name="radio-6" id="radio-6-x" hidden="hidden">
+        <input type="radio" name="radio-6" id="radio-6-o" hidden="hidden">
+        <input type="radio" name="radio-7" id="radio-7-x" hidden="hidden">
+        <input type="radio" name="radio-7" id="radio-7-o" hidden="hidden">
+        <input type="radio" name="radio-8" id="radio-8-x" hidden="hidden">
+        <input type="radio" name="radio-8" id="radio-8-o" hidden="hidden">
+        <div class="box">
+            <div class="item">
+                <label for="radio-0-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-1-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-2-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-3-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-4-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-5-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-6-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-7-x"></label>
+                <div></div>
+            </div>
+            <div class="item">
+                <label for="radio-8-x"></label>
+                <div></div>
+            </div>
+        </div>
+        <div id="c-computer">电脑走
+            <label for="radio-0-o"></label>
+            <label for="radio-1-o"></label>
+            <label for="radio-2-o"></label>
+            <label for="radio-3-o"></label>
+            <label for="radio-4-o"></label>
+            <label for="radio-5-o"></label>
+            <label for="radio-6-o"></label>
+            <label for="radio-7-o"></label>
+            <label for="radio-8-o"></label>
+        </div>
+    </form>
+</body>
+
+</html>
